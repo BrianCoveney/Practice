@@ -38,4 +38,20 @@ public class LogicTest {
     }
 
 
+    @Test
+    public void redTicket() throws Exception {
+        assertEquals(10, logic.redTicket(2,2,2));
+        assertEquals(0, logic.redTicket(2, 2, 1));
+        assertEquals(5, logic.redTicket(0, 0, 0));
+        assertEquals(1, logic.redTicket(2, 0, 0));
+        assertEquals(5, logic.redTicket(1, 1, 1));
+        assertEquals(0, logic.redTicket(1, 2, 1));
+        assertEquals(1, logic.redTicket(1, 2, 0));
+        assertEquals(1, logic.redTicket(0, 2, 2));
+        assertEquals(1, logic.redTicket(1, 2, 2));
+        assertEquals(0, logic.redTicket(0, 2, 0));
+        assertEquals(0, logic.redTicket(1, 1, 2));
+    }
+
+
 }
