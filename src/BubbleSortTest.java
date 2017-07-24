@@ -3,7 +3,8 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.testng.AssertJUnit.assertEquals;
+import static org.junit.Assert.assertEquals;
+
 
 /**
  * Created by brian on 28/05/17.
