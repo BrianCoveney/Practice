@@ -67,5 +67,71 @@ public class Logic {
         return result;
     }
 
+    // You have a green lottery ticket, with ints a, b, and c
+    public int greenTicket(int a, int b, int c) {
+        int result = 0;
+
+        if (a != b && b != c && c != a) {
+            result = 0;
+        }
+
+        if (a == b || b == c || c == a) {
+            result = 10;
+        }
+
+        if (a == b && b == c && c == a){
+            result = 20;
+        }
+
+        return result;
+    }
+
+
+    // You have a blue lottery ticket, with ints a, b, and c...
+    public int blueTicket(int a, int b, int c) {
+
+        int sumAb = a + b;
+        int sumBc = b + c;
+        int sumAc = a + c;
+
+        if (sumAb == 10 || sumBc == 10 || sumAc == 10) {
+            return 10;
+        }
+
+        if (sumAb == sumBc+10 || sumAb == sumAc+10) {
+            return 5;
+        }
+
+        return 0;
+    }
+
+
+    // Given two ints, each in the range 10..99, return true if there is a digit that appears in both numbers,
+    // such as the 2 in 12 and 23
+    public boolean shareDigit(int a, int b) {
+        int aLeft = a / 10;
+        int bLeft = b / 10;
+        int aRight = a % 10;
+        int bRight = b % 10;
+
+        if (aLeft == bLeft || aLeft == bRight || aRight == bLeft || aRight == bRight) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    // If the sum has more digits than a, just return a without b. Else, return sum
+    public int sumLimit(int a, int b) {
+        int sum = a+b;
+
+        if(String.valueOf(sum).length() > String.valueOf(a).length()) {
+            return a;
+        }
+
+        return sum;
+    }
+
 
 }

@@ -54,4 +54,10 @@ public class LogicTest {
     }
 
 
+    @Test
+    public void greenTicket() throws Exception {
+        assertEquals(0, logic.greenTicket(1, 2, 3));
+    }
+
+
 }
