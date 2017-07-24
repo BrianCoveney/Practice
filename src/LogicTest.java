@@ -3,13 +3,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class LogicTest {
-
-
+    Logic logic = new Logic();
 
     @Test
     public void withoutDoubles() throws Exception {
-        Logic logic = new Logic();
-
         assertEquals(5, logic.withoutDoubles(2, 3, true));
         assertEquals(7, logic.withoutDoubles(3, 3, true));
         assertEquals(6, logic.withoutDoubles(3, 3, false));
@@ -22,6 +19,21 @@ public class LogicTest {
         assertEquals(12, logic.withoutDoubles(6, 6, false));
         assertEquals(7, logic.withoutDoubles(1, 6, true));
         assertEquals(7, logic.withoutDoubles(6, 1, false));
+    }
+
+    @Test
+    public void maxMod5() throws Exception {
+        assertEquals(3, logic.maxMod5(2, 3));
+        assertEquals(6, logic.maxMod5(6, 2));
+        assertEquals(3, logic.maxMod5(3, 2));
+        assertEquals(12, logic.maxMod5(8, 12));
+        assertEquals(7, logic.maxMod5(7, 12));
+        assertEquals(6, logic.maxMod5(11, 6));
+        assertEquals(2, logic.maxMod5(2, 7));
+        assertEquals(0, logic.maxMod5(7, 7));
+        assertEquals(9, logic.maxMod5(9, 1));
+        assertEquals(9, logic.maxMod5(9, 14));
+        assertEquals(2, logic.maxMod5(1, 2));
     }
 
 
