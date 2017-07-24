@@ -87,5 +87,39 @@ public class Logic {
     }
 
 
+    // You have a blue lottery ticket, with ints a, b, and c...
+    public int blueTicket(int a, int b, int c) {
+
+        int sumAb = a + b;
+        int sumBc = b + c;
+        int sumAc = a + c;
+
+        if (sumAb == 10 || sumBc == 10 || sumAc == 10) {
+            return 10;
+        }
+
+        if (sumAb == sumBc+10 || sumAb == sumAc+10) {
+            return 5;
+        }
+
+        return 0;
+    }
+
+
+    // Given two ints, each in the range 10..99, return true if there is a digit that appears in both numbers,
+    // such as the 2 in 12 and 23
+    public boolean shareDigit(int a, int b) {
+        int aLeft = a / 10;
+        int bLeft = b / 10;
+        int aRight = a % 10;
+        int bRight = b % 10;
+
+        if (aLeft == bLeft || aLeft == bRight || aRight == bLeft || aRight == bRight) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
