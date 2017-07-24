@@ -67,5 +67,25 @@ public class Logic {
         return result;
     }
 
+    // You have a green lottery ticket, with ints a, b, and c
+    public int greenTicket(int a, int b, int c) {
+        int result = 0;
+
+        if (a != b && b != c && c != a) {
+            result = 0;
+        }
+
+        if (a == b || b == c || c == a) {
+            result = 10;
+        }
+
+        if (a == b && b == c && c == a){
+            result = 20;
+        }
+
+        return result;
+    }
+
+
 
 }
