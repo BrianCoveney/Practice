@@ -3,7 +3,7 @@ import org.junit.Test;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ElectionWinnerTest {
 
@@ -16,43 +16,62 @@ public class ElectionWinnerTest {
 
     @Test
     public void electionWinner() {
-        Map<String, Integer> map = createMapOfCandidatesVotes(votes);
+        Map<String, Integer> candidatesToVotesMap = createMap(votes);
 
-        List<Map.Entry<String, Integer>> list = createSortedList(map);
+        Map<String, Integer> sortedMap = createSortedMap(candidatesToVotesMap);
 
-        String winner = getWinner(list);
+        String winner = getSecondLastEntryWithMaxVotes(sortedMap);
 
         assertEquals("Michael", winner);
     }
 
-    private Map<String, Integer> createMapOfCandidatesVotes(String[] votes) {
+    private Map<String, Integer> createMap(String[] votes) {
         Map<String, Integer> map = new HashMap<>();
-        for (int i = 0; i < votes.length ; i++) {
-            if (map.containsKey(votes[i])) {
-                int num = map.get(votes[i]);
-                map.put(votes[i], num + 1);
-            }
-            else {
-                map.put(votes[i], 1);
+        for (String vote : votes) {
+            if (map.keySet().contains(vote)) {
+                int voteCount = map.get(vote);
+                map.put(vote, voteCount + 1);
+            } else {
+                map.put(vote, 1);
             }
         }
         return map;
     }
 
-    private List<Map.Entry<String, Integer>> createSortedList(Map<String, Integer> map) {
-        List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
+    private Map<String, Integer> createSortedMap(Map<String, Integer> map) {
+        List<Map.Entry<String, Integer>> list = new LinkedList<>(map.entrySet());
         list.sort(Map.Entry.comparingByValue());
-        return list;
+
+        Map<String, Integer> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<String, Integer> entry : list) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+        return sortedMap;
     }
 
-    private String getWinner(List<Map.Entry<String, Integer>> list) {
-        int lastIndex = list.size() - 1;
+    private String getSecondLastEntryWithMaxVotes(Map<String, Integer> map) {
+        Set set = map.entrySet();
+        Iterator iterator = set.iterator();
 
         // Michael and Mary have the highest number of votes, but because Michael is alphabetically last we need the
         // second last index
-        int secondLastIndex = lastIndex -1;
+        int secondLastIndex = set.size() -2;
 
-        String winner = list.get(secondLastIndex).getKey();
-        return winner;
+        Map.Entry entry = null;
+        for (int i = 0; iterator.hasNext(); i++) {
+            entry = (Map.Entry) iterator.next();
+            if (i == secondLastIndex) {
+                break;
+            }
+        }
+        return String.valueOf(entry.getKey());
+    }
+
+    private String mapToString(Map<String, Integer> map) {
+        String result = "";
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            result += (entry.getKey() +"="+ entry.getValue()+"\n");
+        }
+        return result;
     }
 }
